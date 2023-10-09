@@ -33,9 +33,12 @@ func set_state(p_state: String, p_force: bool = false) -> void:
 
 	if stream.stream:
 		stream.stream.set_loop(false)
+		escoria.object_manager.get_object("_music").node.set_volume(-25)
 		$AudioStreamPlayer.play()
-
-
+		
+#func _on_stream_completed():
+#	escoria.object_manager.get_object("_music").node.set_volume(0)
+		
 # Register to the object registry
 func _ready():
 	pause_mode = Node.PAUSE_MODE_STOP
@@ -45,9 +48,16 @@ func _ready():
 		true
 	)
 
-
+func _restore_volume():	
+	yield(get_tree().create_timer(1.5), "timeout")
+	while escoria.object_manager.get_object("_music").node.get_volume() < 0:
+		var vol = escoria.object_manager.get_object("_music").node.get_volume()
+		escoria.object_manager.get_object("_music").node.set_volume(vol + 1)
+		yield(get_tree().create_timer(0.1), "timeout")
+	
 # Callback called when the audio stream player finished playing.
-func _on_AudioStreamPlayer_finished() -> void:
+func _on_AudioStreamPlayer_finished() -> void:	
+	_restore_volume()
 	set_state("off")
 
 

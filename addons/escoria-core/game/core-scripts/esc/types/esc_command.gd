@@ -147,7 +147,12 @@ func run() -> int:
 # If it had already started, the execution will be considered as finished
 # immediately and finish. If it was already finished, nothing will happen.
 func interrupt():
-	_is_interrupted = true
+	_is_interrupted = true	
+	for condition in self.conditions:
+		if condition.comparison == ESCCondition.COMPARISON_STATE:	
+			self.run()
+			return
+	
 	var command = escoria.command_registry.get_command(self.name)
 	if command.has_method("interrupt"):
 		command.interrupt()

@@ -64,7 +64,9 @@ func run(command_params: Array) -> int:
 		escoria.main.get_node("/root").add_child(scene)
 		if command_params[3]:
 			var obj = escoria.object_manager.get_object(command_params[3])
-			scene.set_position(obj.get_global_position())
+			var item = obj.node as ESCItem
+			scene.set_position(item.get_interact_position())
+#			scene.set_position(obj.get_global_position())
 		escoria.inputs_manager.hotspot_focused = ""
 
 		escoria.object_manager.register_object(

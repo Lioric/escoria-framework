@@ -25,9 +25,6 @@ layer = 3
 [node name="ESCDialogsPlayer" type="Control" parent="dialog_layer"]
 theme = ExtResource( 9 )
 script = ExtResource( 2 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

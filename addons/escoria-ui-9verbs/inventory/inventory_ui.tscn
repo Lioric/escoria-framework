@@ -7,9 +7,6 @@
 margin_right = 600.0
 margin_bottom = 175.0
 script = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 inventory_ui_container = NodePath("ScrollContainer/GridContainer")
 
 [node name="ScrollContainer" type="ScrollContainer" parent="."]

@@ -1,6 +1,27 @@
-[gd_resource type="Theme" load_steps=2 format=2]
+[gd_resource type="Theme" load_steps=8 format=2]
 
 [ext_resource path="res://addons/escoria-ui-keyboard-9verbs/fonts/caslonantique.tres" type="DynamicFont" id=1]
 
+[sub_resource type="StyleBoxEmpty" id=1]
+
+[sub_resource type="StyleBoxEmpty" id=2]
+
+[sub_resource type="StyleBoxEmpty" id=7]
+
+[sub_resource type="StyleBoxEmpty" id=4]
+
+[sub_resource type="StyleBoxEmpty" id=5]
+
+[sub_resource type="StyleBoxEmpty" id=6]
+
 [resource]
 default_font = ExtResource( 1 )
+Button/colors/font_color_hover = Color( 0, 0.345098, 0.74902, 1 )
+Button/colors/font_color_pressed = Color( 0.160784, 0.670588, 0, 1 )
+Button/constants/hseparation = 0
+Button/styles/disabled = SubResource( 1 )
+Button/styles/focus = SubResource( 2 )
+Button/styles/hover = SubResource( 7 )
+Button/styles/normal = SubResource( 4 )
+Button/styles/pressed = SubResource( 5 )
+Panel/styles/panel = SubResource( 6 )

@@ -155,7 +155,8 @@ export(Dictionary) var custom_data = {}
 
 
 # ESCAnimationsResource (for walking, idling...)
-var animations: ESCAnimationResource setget set_animations
+var animations: Resource setget set_animations
+#var animations: ESCAnimationResource setget set_animations
 
 # Reference to the animation node (null if none was found)
 var animation_sprite = null
@@ -299,7 +300,7 @@ func _ready():
 			default_action_inventory = default_action
 
 		# Perform a first terrain scaling if we have to.
-		if (not is_exit or dont_apply_terrain_scaling) and is_movable:
+		if _movable and (not is_exit or dont_apply_terrain_scaling) and is_movable:
 			_movable.last_scale = scale
 			_movable.update_terrain()
 
@@ -315,7 +316,7 @@ func validate_exported_parameters() -> void:
 				"Forbidden character in global_id %s (path: %s)"
 						% [global_id, get_path()]
 				)
-
+				
 
 # Mouse exited happens on any item that mouse cursor exited, even those UNDER
 # the top level of overlapping stack.
@@ -690,7 +691,7 @@ func has_moved() -> bool:
 func get_sprite() -> Node:
 	if _sprite_node == null:
 		for child in self.get_children():
-			if child is AnimatedSprite or child is Sprite:
+			if child is AnimatedSprite or child is Sprite or child.name == "Sprite":
 				_sprite_node = child
 	if _sprite_node == null:
 		escoria.logger.error(

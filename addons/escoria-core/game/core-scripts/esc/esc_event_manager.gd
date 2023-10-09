@@ -32,6 +32,7 @@ const EVENT_SETUP = "setup"
 const EVENT_TRANSITION_IN = "transition_in"
 const EVENT_TRANSITION_OUT = "transition_out"
 const EVENT_CANT_REACH = "cant_reach"
+const EVENT_INTERRUPT = "interrupt"
 
 
 # Event channel names
@@ -325,6 +326,8 @@ func interrupt(exceptions: PoolStringArray = []) -> void:
 						events_queue[channel_name].erase(event)
 			else:
 				events_queue[channel_name].clear()
+
+	#queue_event(EVENT_INTERRUPT, true)
 
 
 # Clears the event queues.

@@ -50,27 +50,18 @@ Implement methods to react to inputs.
 """
 
 
-onready var verbs_menu = $ui/Control/panel_down/VBoxContainer/HBoxContainer\
-		/VerbsMargin/verbs_menu
-onready var tooltip = $ui/Control/panel_down/VBoxContainer/MarginContainer\
-		/tooltip
-onready var room_select = $ui/Control/panel_down/VBoxContainer/HBoxContainer\
-		/MainMargin/VBoxContainer/room_select
-onready var inventory_ui = $ui/Control/panel_down/VBoxContainer/HBoxContainer\
-		/InventoryMargin/inventory_ui
+onready var verbs_menu = $ui/Control/panel_down/VBoxContainer/Interface/HBoxContainer/VerbsMargin/verbs_menu
+onready var tooltip = $ui/Control/panel_down/VBoxContainer/MarginContainer/tooltip
+onready var room_select = $ui/room_select_node/room_select
+onready var inventory_ui = $ui/Control/panel_down/VBoxContainer/Interface/HBoxContainer/InventoryMargin/inventory_ui
 const input_map = preload("res://addons/escoria-ui-keyboard-9verbs/input_map.gd")
 
 func _enter_tree():
-	var room_selector_parent = $ui/Control/panel_down/VBoxContainer\
-			/HBoxContainer/MainMargin/VBoxContainer
+	var room_selector_parent = $ui/room_select_node
 
-	if ProjectSettings.get_setting("escoria/debug/enable_room_selector") and \
-			room_selector_parent.get_node_or_null("room_select") == null:
+	if ProjectSettings.get_setting("escoria/debug/enable_room_selector") and room_selector_parent.get_node_or_null("room_select") == null:
 		room_selector_parent.add_child(
-			preload(
-				"res://addons/escoria-core/ui_library/tools/room_select" +\
-				"/room_select.tscn"
-			).instance()
+			preload("res://addons/escoria-core/ui_library/tools/room_select/room_select.tscn").instance()
 		)
 
 	var input_handler = funcref(self, "_process_input")
@@ -344,19 +335,21 @@ func mousewheel_action(_direction: int):
 func hide_ui():
 	$ui/Control.hide()
 	verbs_menu.hide()
-	if ProjectSettings.get("escoria/debug/enable_room_selector") == true:
+	if ProjectSettings.get("escoria/debug/enable_room_selector") == true and room_select:
 		room_select.hide()
 	inventory_ui.hide()
 	tooltip.hide()
+#	$ui/cinema/AnimationPlayer.play("cinematic")
 
 
 func show_ui():
 	$ui/Control.show()
 	verbs_menu.show()
-	if ProjectSettings.get("escoria/debug/enable_room_selector") == true:
+	if ProjectSettings.get("escoria/debug/enable_room_selector") == true and room_select:
 		room_select.show()
 	inventory_ui.show()
 	tooltip.show()
+#	$ui/cinema/AnimationPlayer.play_backwards("cinematic")
 
 func hide_main_menu():
 	if get_node(main_menu).visible:

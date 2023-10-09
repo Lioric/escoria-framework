@@ -1,4 +1,5 @@
-:setup
+:setup | NO_UI
+set_gui_visible false
 anim_block intro_animation_player RESET
 
 :ready | NO_UI

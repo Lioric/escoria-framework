@@ -33,3 +33,10 @@ func _init(group_string: String):
 			"Invalid group detected: %s\nGroup regexp didn't match."
 					% group_string
 		)
+
+func interrupt():
+	for condition in self.conditions:
+		if condition.comparison == ESCCondition.COMPARISON_STATE:	
+			self.run()
+			return true	
+	.interrupt()

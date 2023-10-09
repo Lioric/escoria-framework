@@ -42,18 +42,18 @@ __meta__ = {
 }
 
 [node name="TextureRect" type="TextureRect" parent="VBoxContainer"]
-margin_top = 147.0
+margin_top = 152.0
 margin_right = 616.0
-margin_bottom = 383.0
+margin_bottom = 378.0
 texture = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="menuitems" type="VBoxContainer" parent="VBoxContainer"]
-margin_top = 483.0
+margin_top = 478.0
 margin_right = 616.0
-margin_bottom = 753.0
+margin_bottom = 748.0
 custom_constants/separation = 10
 __meta__ = {
 "_edit_use_anchors_": false

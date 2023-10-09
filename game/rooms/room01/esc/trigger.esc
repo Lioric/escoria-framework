@@ -1,5 +1,9 @@
 :trigger_in
 
+> [!space_ship_takeoff]
+	set_active trigger_talk false
+	walk_block player spaceship_location
+	say player "The space ship is blocking the path."
 
 :trigger_out
-say player "I'm near the door."
+#say player "I'm near the door."

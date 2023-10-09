@@ -76,9 +76,6 @@ margin_top = 524.76
 margin_right = 546.519
 margin_bottom = 524.76
 mouse_filter = 2
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="tool" type="TextureRect" parent="mouse_position"]
 margin_left = 46.4475

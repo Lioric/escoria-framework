@@ -1,19 +1,180 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://addons/escoria-core/game/core-scripts/esc_terrain.gd" type="Script" id=1]
-[ext_resource path="res://game/fonts/caslonantique.tres" type="DynamicFont" id=3]
-[ext_resource path="res://game/characters/mark/mark.tscn" type="PackedScene" id=4]
+[ext_resource path="res://addons/escoria-core/game/core-scripts/esc_background.gd" type="Script" id=2]
+[ext_resource path="res://game/rooms/room01/bkg.png" type="Texture" id=3]
+[ext_resource path="res://game/characters/char3/char3.tscn" type="PackedScene" id=4]
 [ext_resource path="res://addons/escoria-core/game/core-scripts/esc_item.gd" type="Script" id=5]
 [ext_resource path="res://addons/escoria-core/game/core-scripts/esc_room.gd" type="Script" id=6]
 [ext_resource path="res://addons/escoria-core/game/core-scripts/esc_location.gd" type="Script" id=7]
-[ext_resource path="res://game/rooms/room01/room1background.png" type="Texture" id=8]
-[ext_resource path="res://game/rooms/room01/art2.png" type="Texture" id=9]
-[ext_resource path="res://game/rooms/room01/art1.png" type="Texture" id=10]
+[ext_resource path="res://game/rooms/room01/objects/spaceship.png" type="Texture" id=8]
+[ext_resource path="res://game/items/inventory/r5_wrench.tscn" type="PackedScene" id=11]
+[ext_resource path="res://addons/escoria-core/game/assets/images/no_image.png" type="Texture" id=12]
+[ext_resource path="res://game/items/inventory/key.tscn" type="PackedScene" id=13]
+[ext_resource path="res://game/rooms/room01/water.gd" type="Script" id=14]
+[ext_resource path="res://game/items/textures/genericItem_color_096.png" type="Texture" id=15]
 
-[sub_resource type="NavigationPolygon" id=1]
-vertices = PoolVector2Array( 125, 357, 1170, 355, 1277, 417, 1279, 550, -1, 548, 0, 449 )
-polygons = [ PoolIntArray( 0, 1, 2, 3, 4, 5 ) ]
-outlines = [ PoolVector2Array( 125, 357, 1170, 355, 1277, 417, 1279, 550, -1, 548, 0, 449 ) ]
+[sub_resource type="NavigationPolygon" id=31]
+vertices = PoolVector2Array( 1480, 167, 1278, 169, 1291, 165, 1380, 164, 583, 435, 636, 483, 564, 483, 527, 408, 192, 437, -2, 481, 0, 449, 590, 406, 488, 407, 487, 467, 389, 447, 396, 404, 4, 383, 220, 409, 1380, 141, 1427, 141, 1427, 163, 1485, 154, 1533, 147, 1531, 138, 1618, 114, 1616, 99, 1670, 106, 1652, 109, 1660, 92, 1690, 99, 1682, 324, 1673, 306, 1655, 350, 1653.11, 474.587, 1641, 387, 1614, 391, 1615, 402, 1441, 437, 1517, 413, 1573, 406, 1431, 449, 328, 380, 327, 398, 642, 392, 604, 395, 1371, 462, 1413, 451, 1385, 444, 1369, 450, 1364, 428, 1359, 452, 1356, 439, 1303, 429, 1241, 443, 1230, 422, 1279, 420, 1215, 431, 1194, 424, 1201, 435, 1179, 427, 1164, 417, 1149, 411, 1158, 425, 1144, 417, 1137, 405, 1141, 396, 1068, 409, 1060, 415, 1062, 391, 1069, 380, 1014, 376, 1021, 389, 819, 379, 901, 401, 861, 399, 741, 398, 749, 390 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ), PoolIntArray( 4, 5, 6, 7 ), PoolIntArray( 8, 9, 10 ), PoolIntArray( 11, 4, 7 ), PoolIntArray( 12, 13, 14, 15 ), PoolIntArray( 8, 10, 16, 17 ), PoolIntArray( 3, 18, 19, 20 ), PoolIntArray( 0, 3, 20 ), PoolIntArray( 0, 20, 21, 22 ), PoolIntArray( 22, 21, 23, 24 ), PoolIntArray( 24, 23, 25 ), PoolIntArray( 26, 27, 24, 25, 28, 29 ), PoolIntArray( 26, 29, 30, 31 ), PoolIntArray( 32, 31, 30, 33, 34 ), PoolIntArray( 35, 34, 33, 36 ), PoolIntArray( 37, 38, 39, 36, 33, 40 ), PoolIntArray( 17, 16, 41, 42 ), PoolIntArray( 15, 42, 41, 43, 44 ), PoolIntArray( 40, 33, 45, 46 ), PoolIntArray( 47, 46, 45, 48 ), PoolIntArray( 49, 48, 45, 50, 51 ), PoolIntArray( 52, 49, 51, 53 ), PoolIntArray( 54, 55, 52, 53, 56 ), PoolIntArray( 57, 56, 53, 58, 59, 60 ), PoolIntArray( 61, 60, 59, 62, 63 ), PoolIntArray( 61, 63, 64, 65 ), PoolIntArray( 66, 65, 64, 67 ), PoolIntArray( 66, 67, 68, 69 ), PoolIntArray( 70, 69, 68, 71 ), PoolIntArray( 72, 70, 71, 73, 74 ), PoolIntArray( 72, 74, 75, 76 ), PoolIntArray( 43, 76, 75, 44 ), PoolIntArray( 7, 12, 15, 44, 11 ) ]
+outlines = [ PoolVector2Array( 4, 383, 328, 380, 642, 392, 749, 390, 819, 379, 1014, 376, 1069, 380, 1068, 409, 1141, 396, 1149, 411, 1164, 417, 1194, 424, 1215, 431, 1230, 422, 1279, 420, 1303, 429, 1364, 428, 1369, 450, 1385, 444, 1413, 451, 1431, 449, 1441, 437, 1517, 413, 1573, 406, 1615, 402, 1614, 391, 1641, 387, 1655, 350, 1673, 306, 1670, 106, 1652, 109, 1618, 114, 1533, 147, 1480, 167, 1278, 169, 1291, 165, 1380, 164, 1380, 141, 1427, 141, 1427, 163, 1485, 154, 1531, 138, 1616, 99, 1660, 92, 1690, 99, 1682, 324, 1653.11, 474.587, 1371, 462, 1359, 452, 1356, 439, 1241, 443, 1201, 435, 1179, 427, 1158, 425, 1144, 417, 1137, 405, 1060, 415, 1062, 391, 1021, 389, 901, 401, 861, 399, 741, 398, 604, 395, 590, 406, 583, 435, 636, 483, 564, 483, 527, 408, 488, 407, 487, 467, 389, 447, 396, 404, 327, 398, 220, 409, 192, 437, -2, 481, 0, 449 ) ]
+
+[sub_resource type="Animation" id=32]
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.45 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=33]
+length = 5.5
+step = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = false
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1.66, 2.861, 4.14515, 5.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, -180 ), Vector2( 0, -155 ), Vector2( -200, -190 ), Vector2( -300, -170 ) ]
+}
+
+[sub_resource type="Animation" id=34]
+length = 4.0
+loop = true
+step = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1.241, 2.6 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -300, -170 ), Vector2( -300, -175 ), Vector2( -300, -190 ) ]
+}
+
+[sub_resource type="Shader" id=43]
+code = "/*
+Shader from Godot Shaders - the free shader library.
+godotshaders.com/shader/2d-waterfall
+
+Feel free to improve and change this shader according to your needs
+and consider sharing the modified result on godotshaders.com.
+*/
+
+shader_type canvas_item;
+
+uniform vec2 scale; // Used for sprite script. Don't edit this value in the inspector.
+uniform float zoom; // Used for sprite script. Don't edit this value in the inspector.
+
+uniform sampler2D refraction_map;
+uniform sampler2D water_mask;
+
+uniform vec2 gap_stretch = vec2(0.8, 0.05);
+uniform vec2 refraction_stretch = vec2(2.0, 0.8);
+uniform float refraction_strength : hint_range(0.0, 0.1) = 0.02;
+
+uniform vec4 water_tint : hint_color = vec4(0.2, 0.6, 1.0, 0.1);
+uniform vec4 water_highlight : hint_color = vec4(1.0, 1.0, 1.0, 0.3);
+uniform float speed = 1.0;
+uniform float flow_gaps : hint_range(0.0, 1.0) = 0.33;
+uniform float highlight_width : hint_range(0.0, 0.3) = 0.02;
+
+void fragment()
+{
+	// Get the two noise textures and make them move on the y axis. The gaps move twice as fast as the refraction, but you can tweak this by changing (speed * 0.5)
+	vec2 refraction_offset = texture(refraction_map, vec2(UV.x, UV.y + -TIME * speed * 0.5) * scale * refraction_stretch).xy;
+	vec2 gap_mask = texture(water_mask, vec2(UV.x, UV.y + -TIME * speed) * scale * gap_stretch).xy;
+	
+	// Set values between -0.5 and 0.5 (instead of 0 and 1). Otherwise the reflection will move whith increased refraction_strength
+	refraction_offset -= 0.5; 
+	
+	// Get the screen texture and distort it
+	vec4 refraction = texture(SCREEN_TEXTURE, SCREEN_UV - refraction_offset * refraction_strength * zoom);
+	
+	
+	// Create holes and apply colors and textures //
+	
+	vec4 color = vec4(1.0);
+	
+	// Define what values will be the water highlight color (the gap border)
+	float inner_edge = flow_gaps + highlight_width;
+	
+	// See if the pixel is within the edges range and use the water colors alpha to blend between showing color or refraction texture.
+	if (gap_mask.x < inner_edge)
+	{
+		color.rgb = mix(refraction.rgb, water_highlight.rgb, water_highlight.a);
+	}
+	else
+	{
+		color.rgb = mix(refraction.rgb, water_tint.rgb, water_tint.a);
+	}
+	
+	// If the value is below the gap threshhold make it transparent (a gap)
+	if (gap_mask.x < flow_gaps)
+	{
+		color.a = 0.0;
+	}
+	
+	
+	// Crate Edge Shape //
+	
+	// Set the shape for the top and bottom edges. Use water_mask as shape but with other values to flatten it out horizontally. 
+	vec2 water_edge = texture(water_mask, vec2(UV.x, UV.y + -TIME * 0.1) * scale * vec2(0.15, 0.6)).xy;
+	water_edge -= 0.5;
+	
+	// Use the same mask as for the gaps for left and right edge.
+	vec2 vertical_edge_mask = gap_mask - 0.5;
+	
+	// Apply the new masks to the edges. This will make the wobble effect.
+	color.a = mix(0.0, color.a, step(UV.x + vertical_edge_mask.x * 0.2, 0.92)); // Right edge
+	color.a = mix(color.a, 0.0, step(UV.x - vertical_edge_mask.x * 0.2, 0.08)); // Left edge
+	
+	color.a = mix(0.0, color.a, step(UV.y + water_edge.y * 0.1, 0.95));  //Bottom edge
+	color.a = mix(color.a, 0.0, step(UV.y - water_edge.y * 0.05, 0.05)); //Top edge
+	
+	COLOR = color;
+}"
+
+[sub_resource type="OpenSimplexNoise" id=36]
+
+[sub_resource type="NoiseTexture" id=44]
+seamless = true
+noise = SubResource( 36 )
+
+[sub_resource type="OpenSimplexNoise" id=38]
+
+[sub_resource type="NoiseTexture" id=45]
+seamless = true
+noise = SubResource( 38 )
+
+[sub_resource type="ShaderMaterial" id=40]
+shader = SubResource( 43 )
+shader_param/scale = Vector2( 0.8, 0.5 )
+shader_param/zoom = 0.793701
+shader_param/gap_stretch = Vector2( 0.8, 0.05 )
+shader_param/refraction_stretch = Vector2( 2, 0.8 )
+shader_param/refraction_strength = 0.02
+shader_param/water_tint = Color( 0.2, 0.6, 1, 0.1 )
+shader_param/water_highlight = Color( 1, 1, 1, 0.3 )
+shader_param/speed = 1.0
+shader_param/flow_gaps = 0.33
+shader_param/highlight_width = 0.02
+shader_param/refraction_map = SubResource( 44 )
+shader_param/water_mask = SubResource( 45 )
 
 [node name="room1" type="Node2D"]
 script = ExtResource( 6 )
@@ -23,60 +184,38 @@ __meta__ = {
 global_id = "room1"
 esc_script = "res://game/rooms/room01/esc/room01.esc"
 player_scene = ExtResource( 4 )
-camera_limits = [ Rect2( 0, 0, 1280, 550 ) ]
+camera_limits = [  ]
 editor_debug_mode = 1
 
-[node name="Room1Background" type="Sprite" parent="."]
-texture = ExtResource( 8 )
-centered = false
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="advice2" type="Label" parent="Room1Background"]
-anchor_right = 0.023274
-anchor_bottom = 0.018018
-margin_left = 90.2752
-margin_top = 170.824
-margin_right = 298.275
-margin_bottom = 215.824
-custom_fonts/font = ExtResource( 3 )
-text = "Move : left click
-Fast move : double left click"
-
-[node name="room_label" type="Label" parent="Room1Background"]
-margin_left = 7.0
-margin_top = 3.0
-margin_right = 89.0
-margin_bottom = 24.0
-custom_fonts/font = ExtResource( 3 )
-text = "ROOM 1"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="advice" type="Label" parent="Room1Background"]
-anchor_right = 0.023274
-anchor_bottom = 0.018018
-margin_left = 90.0
-margin_top = 59.0
-margin_right = 368.0
-margin_bottom = 128.0
-custom_fonts/font = ExtResource( 3 )
-text = "Don't click immediately! 
-Player will walk around the room, 
-but you can interrupt him if you want."
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="ESCBackground" type="TextureRect" parent="."]
+margin_right = 1647.0
+margin_bottom = 770.0
+mouse_filter = 2
+texture = ExtResource( 3 )
+script = ExtResource( 2 )
 
 [node name="walkable_area" type="Navigation2D" parent="."]
 script = ExtResource( 1 )
+scale_max = 0.8
+player_speed_multiplier = 0.4
 
 [node name="NavigationPolygonInstance" type="NavigationPolygonInstance" parent="walkable_area"]
-navpoly = SubResource( 1 )
+position = Vector2( 0, 227 )
+navpoly = SubResource( 31 )
 
 [node name="Hotspots" type="Node2D" parent="."]
+
+[node name="wrench" parent="Hotspots" instance=ExtResource( 11 )]
+position = Vector2( 587, 698 )
+rotation = 0.785397
+scale = Vector2( 0.476011, 0.476011 )
+player_orients_on_arrival = false
+tooltip_name = "wrench"
+
+[node name="ESCLocation2" type="Position2D" parent="Hotspots/wrench"]
+position = Vector2( -51.9919, -1.48547 )
+script = ExtResource( 7 )
+interaction_direction = 3
 
 [node name="r_door" type="Area2D" parent="Hotspots"]
 pause_mode = 1
@@ -91,87 +230,89 @@ dialog_color = Color( 1, 1, 1, 1 )
 animations = null
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Hotspots/r_door"]
-polygon = PoolVector2Array( 1173, 63, 1278, 106, 1278, 420, 1172, 356 )
+position = Vector2( 749, 259 )
+scale = Vector2( 0.530661, 0.307345 )
+polygon = PoolVector2Array( 1185.43, 107.376, 1278, 106, 1278, 420, 1183.54, 426.236 )
 
 [node name="ESCLocation" type="Position2D" parent="Hotspots/r_door"]
-position = Vector2( 1221, 400 )
+position = Vector2( 1403, 390 )
 script = ExtResource( 7 )
 
-[node name="artwork1" type="Area2D" parent="Hotspots"]
+[node name="SpaceShip" type="Area2D" parent="Hotspots"]
 pause_mode = 1
+z_index = 1
 script = ExtResource( 5 )
-global_id = "r1_wall_item1"
-esc_script = "res://game/rooms/room01/esc/wall_item.esc"
-tooltip_name = "Artwork"
+global_id = "spaceship"
+esc_script = "res://game/rooms/room01/objects/spaceship.esc"
+interaction_direction = 3
+tooltip_name = "An alien looking space ship"
 default_action = "look"
 combine_when_selected_action_is_in = [  ]
-inventory_texture = ExtResource( 10 )
+inventory_texture = ExtResource( 8 )
 dialog_color = Color( 1, 1, 1, 1 )
 animations = null
 
-[node name="Art1" type="Sprite" parent="Hotspots/artwork1"]
-position = Vector2( 470, 140 )
-texture = ExtResource( 10 )
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Hotspots/SpaceShip"]
+position = Vector2( 0, 228 )
+z_index = 1
+polygon = PoolVector2Array( 1176, 389, 1186, 417, 1198, 433, 1295, 433, 1378, 420, 1452, 398, 1532, 412, 1606, 417, 1648, 420, 1652, 387, 1548, 368, 1519, 357, 1552, 352, 1584, 350, 1570, 333, 1508, 339, 1505, 319, 1554, 269, 1478, 282, 1430, 262, 1406, 273, 1375, 262, 1333, 292, 1248, 309 )
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Hotspots/artwork1"]
-position = Vector2( -84, 11.1 )
-polygon = PoolVector2Array( 487, 62, 627, 62, 627, 198, 487, 199 )
+[node name="Sprite" type="Sprite" parent="Hotspots/SpaceShip"]
+position = Vector2( 1419, 576 )
+texture = ExtResource( 8 )
 
-[node name="ESCLocation" type="Position2D" parent="Hotspots/artwork1"]
-position = Vector2( 476, 385 )
+[node name="ESCLocation" type="Position2D" parent="Hotspots/SpaceShip"]
+position = Vector2( 1135, 628 )
 script = ExtResource( 7 )
+global_id = "spaceship_location"
+interaction_direction = 3
 
-[node name="Label" type="Label" parent="Hotspots/artwork1"]
-margin_left = 375.422
-margin_top = 268.594
-margin_right = 657.422
-margin_bottom = 313.594
-custom_fonts/font = ExtResource( 3 )
-text = "If you look at this object, the character's
-speech will appear above his head"
-__meta__ = {
-"_edit_use_anchors_": false,
-"_editor_description_": ""
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Hotspots/SpaceShip"]
+anims/RESET = SubResource( 32 )
+anims/fly = SubResource( 33 )
+anims/hover = SubResource( 34 )
 
-[node name="artwork2" type="Area2D" parent="Hotspots"]
-pause_mode = 1
-script = ExtResource( 5 )
-global_id = "r1_wall_item2"
-esc_script = "res://game/rooms/room01/esc/wall_item_popupdialog.esc"
-tooltip_name = "Artwork 2"
+[node name="Key" parent="Hotspots" instance=ExtResource( 13 )]
+position = Vector2( 131, 650 )
+rotation = -0.523598
+scale = Vector2( 0.350425, 0.350425 )
+player_orients_on_arrival = true
+interaction_direction = 5
+tooltip_name = "Space ship key"
 default_action = "look"
-combine_when_selected_action_is_in = [  ]
-inventory_texture = ExtResource( 9 )
-dialog_color = Color( 1, 1, 1, 1 )
-animations = null
+default_action_inventory = "look"
+combine_when_selected_action_is_in = [ "use" ]
 
-[node name="Art12" type="Sprite" parent="Hotspots/artwork2"]
-position = Vector2( 830, 140 )
-texture = ExtResource( 9 )
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Hotspots/artwork2"]
-position = Vector2( 273, 11 )
-polygon = PoolVector2Array( 487, 62, 627, 62, 627, 198, 487, 199 )
-
-[node name="ESCLocation" type="Position2D" parent="Hotspots/artwork2"]
-position = Vector2( 829, 379 )
+[node name="ESCLocation" type="Position2D" parent="Hotspots/Key"]
+position = Vector2( 93.3517, 20.9452 )
 script = ExtResource( 7 )
+interaction_direction = 5
 
-[node name="Label2" type="Label" parent="Hotspots/artwork2"]
-margin_left = 734.0
-margin_top = 269.0
-margin_right = 1020.0
-margin_bottom = 314.0
-custom_fonts/font = ExtResource( 3 )
-text = "If you look at this object, the character
-will talk via a popup"
-__meta__ = {
-"_edit_use_anchors_": false,
-"_editor_description_": ""
-}
+[node name="player_start" type="Position2D" parent="."]
+position = Vector2( 172.471, 662.487 )
+script = ExtResource( 7 )
+global_id = "r1_start"
+is_start_location = true
 
-[node name="trigger_talk" type="Area2D" parent="Hotspots"]
+[node name="orients_down_on_arrival" type="Position2D" parent="."]
+position = Vector2( 400.129, 660.969 )
+script = ExtResource( 7 )
+global_id = "r1_destination_point"
+interaction_direction = 4
+
+[node name="set_angle_by_esc" type="Position2D" parent="."]
+position = Vector2( 1053, 611 )
+script = ExtResource( 7 )
+global_id = "r1_destination_point2"
+player_orients_on_arrival = false
+
+[node name="turn_to_r_door_by_esc" type="Position2D" parent="."]
+position = Vector2( 607, 619 )
+script = ExtResource( 7 )
+global_id = "r1_destination_point3"
+player_orients_on_arrival = false
+
+[node name="trigger_talk" type="Area2D" parent="."]
 pause_mode = 1
 script = ExtResource( 5 )
 global_id = "trigger_talk"
@@ -182,28 +323,32 @@ combine_when_selected_action_is_in = [  ]
 dialog_color = Color( 1, 1, 1, 1 )
 animations = null
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Hotspots/trigger_talk"]
-polygon = PoolVector2Array( 1027, 352, 1187, 502, 1249.67, 445.131, 1123, 351 )
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="trigger_talk"]
+position = Vector2( 422, 277 )
+scale = Vector2( 0.777779, 1 )
+z_index = 1
+polygon = PoolVector2Array( 1027, 330, 1024, 459, 1059, 460, 1060, 331 )
 
-[node name="player_start" type="Position2D" parent="."]
-position = Vector2( 172.471, 434.487 )
-script = ExtResource( 7 )
-global_id = "r1_start"
-is_start_location = true
-
-[node name="orients_down_on_arrival" type="Position2D" parent="."]
-position = Vector2( 400.129, 432.969 )
-script = ExtResource( 7 )
-global_id = "r1_destination_point"
-
-[node name="set_angle_by_esc" type="Position2D" parent="."]
-position = Vector2( 934.11, 502.959 )
-script = ExtResource( 7 )
-global_id = "r1_destination_point2"
+[node name="light" type="Area2D" parent="."]
+pause_mode = 1
+script = ExtResource( 5 )
+is_interactive = false
 player_orients_on_arrival = false
+combine_when_selected_action_is_in = [  ]
+inventory_texture = ExtResource( 15 )
+dialog_color = Color( 1, 1, 1, 1 )
+animations = null
 
-[node name="turn_to_r_door_by_esc" type="Position2D" parent="."]
-position = Vector2( 660.468, 381.489 )
+[node name="water" type="Sprite" parent="."]
+material = SubResource( 40 )
+position = Vector2( 1421.48, 527.5 )
+scale = Vector2( 2.90066, 6.1 )
+texture = ExtResource( 12 )
+script = ExtResource( 14 )
+
+[node name="wrenching_location" type="Position2D" parent="."]
+position = Vector2( 1188, 653 )
 script = ExtResource( 7 )
-global_id = "r1_destination_point3"
-player_orients_on_arrival = false
+global_id = "wrenching_location"
+
+[connection signal="item_rect_changed" from="water" to="water" method="_on_Waterfall_item_rect_changed"]

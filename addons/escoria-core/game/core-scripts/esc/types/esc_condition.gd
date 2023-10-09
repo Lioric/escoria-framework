@@ -9,14 +9,15 @@ enum {
 	COMPARISON_EQ,
 	COMPARISON_GT,
 	COMPARISON_LT,
-	COMPARISON_ACTIVITY
+	COMPARISON_ACTIVITY,
+	COMPARISON_STATE,
 }
 
 
 # Regex that matches condition lines
 const REGEX = \
 	'^(?<is_negated>!)?(?<comparison>eq|gt|lt)? ?(?<is_inventory>i\/)?' + \
-	'(?<is_activity>a\/)?(?<flag>[^ ]+)( (?<comparison_value>.+))?$'
+	'(?<is_activity>a\/)?(?<is_state>s\/)?(?<flag>[^ ]+)( (?<comparison_value>.+))?$'
 
 
 const COMPARISON_DESCRIPTION = [
@@ -24,7 +25,8 @@ const COMPARISON_DESCRIPTION = [
 	"Checking if %s %s %s equals %s",
 	"Checking if %s %s %s greater than %s",
 	"Checking if %s %s %s less than %s",
-	"Checking if %s %s %s active%s"
+	"Checking if %s %s %s active%s",
+	"Checking if %s %s %s interrupted%s",
 ]
 
 
@@ -82,6 +84,8 @@ func _init(comparison_string: String):
 				self.inventory = true
 			if "is_activity" in result.names:
 				self.comparison = COMPARISON_ACTIVITY
+			if "is_state" in result.names:
+				self.comparison = COMPARISON_STATE
 			if "flag" in result.names:
 				self.flag = ESCUtils.get_re_group(result, "flag")
 	else:
@@ -132,6 +136,9 @@ func run() -> bool:
 	elif self.comparison == COMPARISON_ACTIVITY and \
 			escoria.object_manager.has(global_name) and \
 				escoria.object_manager.get_object(global_name).active:
+		return_value = true
+	elif self.comparison == -10 and \
+			escoria.object_manager.has(global_name):
 		return_value = true
 
 	if self.negated:

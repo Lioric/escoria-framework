@@ -7,15 +7,13 @@ margin_right = 493.0
 margin_bottom = 263.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+custom_constants/vseparation = 8
 columns = 3
 script = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="open" type="Button" parent="."]
-margin_right = 161.0
-margin_bottom = 85.0
+margin_right = 162.0
+margin_bottom = 83.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 toggle_mode = true
@@ -25,9 +23,9 @@ __meta__ = {
 }
 
 [node name="pickup" type="Button" parent="."]
-margin_left = 165.0
-margin_right = 326.0
-margin_bottom = 85.0
+margin_left = 166.0
+margin_right = 328.0
+margin_bottom = 83.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 toggle_mode = true
@@ -37,9 +35,9 @@ __meta__ = {
 }
 
 [node name="push" type="Button" parent="."]
-margin_left = 330.0
-margin_right = 491.0
-margin_bottom = 85.0
+margin_left = 332.0
+margin_right = 493.0
+margin_bottom = 83.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 toggle_mode = true
@@ -49,9 +47,9 @@ __meta__ = {
 }
 
 [node name="close" type="Button" parent="."]
-margin_top = 89.0
-margin_right = 161.0
-margin_bottom = 174.0
+margin_top = 91.0
+margin_right = 162.0
+margin_bottom = 173.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 toggle_mode = true
@@ -61,10 +59,10 @@ __meta__ = {
 }
 
 [node name="look" type="Button" parent="."]
-margin_left = 165.0
-margin_top = 89.0
-margin_right = 326.0
-margin_bottom = 174.0
+margin_left = 166.0
+margin_top = 91.0
+margin_right = 328.0
+margin_bottom = 173.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 toggle_mode = true
@@ -74,10 +72,10 @@ __meta__ = {
 }
 
 [node name="pull" type="Button" parent="."]
-margin_left = 330.0
-margin_top = 89.0
-margin_right = 491.0
-margin_bottom = 174.0
+margin_left = 332.0
+margin_top = 91.0
+margin_right = 493.0
+margin_bottom = 173.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 toggle_mode = true
@@ -87,8 +85,8 @@ __meta__ = {
 }
 
 [node name="give" type="Button" parent="."]
-margin_top = 178.0
-margin_right = 161.0
+margin_top = 181.0
+margin_right = 162.0
 margin_bottom = 263.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -99,9 +97,9 @@ __meta__ = {
 }
 
 [node name="use" type="Button" parent="."]
-margin_left = 165.0
-margin_top = 178.0
-margin_right = 326.0
+margin_left = 166.0
+margin_top = 181.0
+margin_right = 328.0
 margin_bottom = 263.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -112,9 +110,9 @@ __meta__ = {
 }
 
 [node name="talk" type="Button" parent="."]
-margin_left = 330.0
-margin_top = 178.0
-margin_right = 491.0
+margin_left = 332.0
+margin_top = 181.0
+margin_right = 493.0
 margin_bottom = 263.0
 size_flags_horizontal = 3
 size_flags_vertical = 3

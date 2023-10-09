@@ -199,6 +199,11 @@ func save_game(p_savegame_res: Resource) -> void:
 				else "No current scene (not loaded yet)"
 	}
 
+func set_cinematic_mode(active: bool):
+	if active:
+		$layers/cinema/AnimationPlayer.play("cinematic")
+	else:
+		$layers/cinema/AnimationPlayer.play_backwards("cinematic")
 
 # Sanity check that the game.tscn scene's root node script MUST
 # implement the following methods. If they do not exist, stop immediately.

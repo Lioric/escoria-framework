@@ -33,7 +33,7 @@ const CAMERA_SCENE_PATH = "res://addons/escoria-core/game/scenes/camera_player/c
 
 
 # Logger class
-const Logger = preload("res://addons/escoria-core/game/esc_logger.gd")
+var Logger = load("res://addons/escoria-core/game/esc_logger.gd")
 
 
 # Logger instance

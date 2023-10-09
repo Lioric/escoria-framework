@@ -254,15 +254,15 @@ flags = 4
 atlas = ExtResource( 3 )
 region = Rect2( 408, 0, 24, 70 )
 
-[sub_resource type="AtlasTexture" id=72]
-flags = 4
-atlas = ExtResource( 3 )
-region = Rect2( 432, 0, 24, 70 )
-
 [sub_resource type="AtlasTexture" id=73]
 flags = 4
 atlas = ExtResource( 3 )
 region = Rect2( 456, 0, 24, 70 )
+
+[sub_resource type="AtlasTexture" id=72]
+flags = 4
+atlas = ExtResource( 3 )
+region = Rect2( 432, 0, 24, 70 )
 
 [sub_resource type="AtlasTexture" id=74]
 flags = 4
@@ -468,7 +468,7 @@ animations = [ {
 "name": "walk_down_jester",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 71 ), SubResource( 72 ), SubResource( 73 ), SubResource( 74 ), SubResource( 75 ) ],
+"frames": [ SubResource( 71 ), SubResource( 73 ), SubResource( 72 ), SubResource( 74 ), SubResource( 75 ) ],
 "loop": true,
 "name": "walk_left_jester",
 "speed": 5.0
@@ -521,9 +521,6 @@ shape = SubResource( 32 )
 [node name="debug" type="Label" parent="."]
 margin_right = 40.0
 margin_bottom = 14.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="dialog_position" type="Position2D" parent="."]
 position = Vector2( 0, -320 )

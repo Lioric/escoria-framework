@@ -1,10 +1,11 @@
 :look
-say player "That's a wrench on the floor." [!i/r5_wrench]
-say player "It seems even more useful now that I picked it up." [i/r5_wrench]
+say player "That's a wrench on the floor." [!i/wrench]
+say player "It seems even more useful now that I picked it up." [i/wrench]
 stop
 
 :pickup
-inventory_add r5_wrench
-set_active r5_wrench false
+inventory_add wrench
+set_active wrench false
+play_snd res://game/sfx/pickup.ogg 
 
 

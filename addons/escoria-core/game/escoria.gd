@@ -37,9 +37,9 @@ func _init():
 			"Project setting '%s' is not set!" % ESCProjectSettingsManager.GAME_SCENE
 		)
 	else:
-		escoria.game_scene = escoria.resource_cache.get_resource(
-			ESCProjectSettingsManager.get_setting(ESCProjectSettingsManager.GAME_SCENE)
-		).instance()
+		var path = ESCProjectSettingsManager.get_setting(ESCProjectSettingsManager.GAME_SCENE)
+		var res = escoria.resource_cache.get_resource(path)
+		escoria.game_scene = res.instance()
 
 
 # Load settings

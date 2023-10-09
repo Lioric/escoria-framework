@@ -391,6 +391,10 @@ func _perform_script_events(room: ESCRoom) -> void:
 		while rc[1] != escoria.event_manager.EVENT_READY:
 			rc = yield(escoria.event_manager, "event_finished")
 		if rc[0] != ESCExecution.RC_OK:
+#			if rc[0] == ESCExecution.RC_INTERRUPTED:
+#				var event_name = escoria.event_manager.EVENT_INTERRUPT
+#				if room.compiled_script.events.has(event_name):
+#					escoria.event_manager.schedule_event(room.compiled_script.events[event_name], 0.10)								
 			return rc[0]
 
 	# Now that :ready is finished, if FORCE_LAST_SCENE_NULL was true, reset it

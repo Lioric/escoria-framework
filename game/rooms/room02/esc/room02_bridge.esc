@@ -2,6 +2,20 @@
 
 :setup
 
+> [portal_active]
+	say player "I REALLY don't know what that stuff is." 
+	play_snd res://game/sfx/sounds/doorOpen_2.ogg 
+	set_state r2_bridge bridge_close true
+	enable_terrain bridge_closed
+	set_interactive r2_right_platform false
+	
+> [eq portal_active true]
+	say player "I REALLY don't know what that stuff is." 
+	play_snd res://game/sfx/sounds/doorOpen_2.ogg 
+	set_state r2_bridge bridge_close true
+	enable_terrain bridge_closed
+	set_interactive r2_right_platform false
+
 
 > [r2_bridge_closed]
 	# Make set_state IMMEDIATE to reach the final frame immediately
@@ -29,8 +43,9 @@
 	stop
 
 
-
 :ready
+
+play_snd res://game/rooms/room02/sfx/water_cave.ogg _music 
 
 # DEBUG
 #set_state r2_bridge bridge_close 

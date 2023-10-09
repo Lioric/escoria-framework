@@ -91,13 +91,11 @@ uppercase = true
 [node name="Description" type="MarginContainer" parent="VBoxContainer"]
 margin_top = 116.0
 margin_right = 500.0
-margin_bottom = 249.0
+margin_bottom = 232.0
 
 [node name="ObjectDescription" type="Label" parent="VBoxContainer/Description"]
-visible = false
-margin_top = 8.0
 margin_right = 500.0
-margin_bottom = 124.0
+margin_bottom = 116.0
 text = "The object creator is used to create background objects
 that the player can interact with, but that will not become
 part of their inventory.
@@ -108,8 +106,10 @@ is currently selected in the scene tree.
 align = 1
 
 [node name="InventoryDescription" type="Label" parent="VBoxContainer/Description"]
+visible = false
+margin_top = -9.0
 margin_right = 500.0
-margin_bottom = 133.0
+margin_bottom = 124.0
 text = "The inventory item creator is used to create objects
 that the player can pick up to add
 to their inventory.
@@ -121,9 +121,9 @@ game must live in the same folder.
 align = 1
 
 [node name="Content" type="MarginContainer" parent="VBoxContainer"]
-margin_top = 253.0
+margin_top = 236.0
 margin_right = 500.0
-margin_bottom = 753.0
+margin_bottom = 736.0
 rect_min_size = Vector2( 0, 500 )
 mouse_filter = 1
 custom_constants/margin_right = 20
@@ -336,9 +336,9 @@ margin_right = 110.0
 margin_bottom = 409.0
 
 [node name="Buttons" type="MarginContainer" parent="VBoxContainer"]
-margin_top = 757.0
+margin_top = 740.0
 margin_right = 500.0
-margin_bottom = 787.0
+margin_bottom = 770.0
 mouse_filter = 2
 custom_constants/margin_bottom = 10
 

@@ -1,6 +1,7 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://addons/escoria-core/game/core-scripts/esc_terrain.gd" type="Script" id=1]
+[ext_resource path="res://addons/escoria-core/game/core-scripts/esc_background.gd" type="Script" id=2]
 [ext_resource path="res://addons/escoria-core/game/core-scripts/esc_exit.gd" type="Script" id=3]
 [ext_resource path="res://game/characters/mark/mark.tscn" type="PackedScene" id=4]
 [ext_resource path="res://game/rooms/room06/wave.png" type="Texture" id=5]
@@ -62,9 +63,12 @@ esc_script = "res://game/rooms/room06/esc/room06.esc"
 player_scene = ExtResource( 4 )
 camera_limits = [ Rect2( 0, 0, 1280, 555 ) ]
 
-[node name="Room6Background" type="Sprite" parent="."]
+[node name="ESCBackground" type="TextureRect" parent="."]
+margin_right = 1280.0
+margin_bottom = 550.0
+mouse_filter = 2
 texture = ExtResource( 12 )
-centered = false
+script = ExtResource( 2 )
 
 [node name="walkable_area" type="Navigation2D" parent="."]
 script = ExtResource( 1 )
@@ -81,12 +85,11 @@ __meta__ = {
 
 [node name="worker" parent="Hotspots" instance=ExtResource( 7 )]
 position = Vector2( 478, 377 )
-esc_script = "res://game/rooms/room06/esc/worker.esc"
-interaction_angle = 90
+interaction_direction = 2
 dialog_color = Color( 0.14902, 0.388235, 0.462745, 1 )
 
 [node name="Position2D" type="Position2D" parent="Hotspots/worker"]
-position = Vector2( -111, 2 )
+position = Vector2( -81, 2 )
 script = ExtResource( 9 )
 
 [node name="r6_l_exit" type="Area2D" parent="Hotspots"]

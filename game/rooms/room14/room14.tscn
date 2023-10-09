@@ -140,7 +140,7 @@ position = Vector2( 204.268, 376.233 )
 esc_script = "res://game/rooms/room14/esc/worker.esc"
 
 [node name="worker2" parent="." instance=ExtResource( 10 )]
-position = Vector2( 726, 390 )
+position = Vector2( 705, 386 )
 global_id = "worker2"
 esc_script = "res://game/rooms/room14/esc/worker2.esc"
 

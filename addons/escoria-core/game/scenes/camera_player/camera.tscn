@@ -3,6 +3,7 @@
 [ext_resource path="res://addons/escoria-core/game/scenes/camera_player/esc_camera.gd" type="Script" id=1]
 
 [node name="camera" type="Camera2D"]
+position = Vector2( 633, 454 )
 current = true
 drag_margin_h_enabled = true
 drag_margin_v_enabled = true

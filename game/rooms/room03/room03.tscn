@@ -1,344 +1,199 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://addons/escoria-core/game/core-scripts/esc_terrain.gd" type="Script" id=1]
+[ext_resource path="res://game/rooms/room03/background.png" type="Texture" id=2]
 [ext_resource path="res://game/fonts/caslonantique.tres" type="DynamicFont" id=3]
 [ext_resource path="res://game/characters/mark/mark.tscn" type="PackedScene" id=4]
 [ext_resource path="res://addons/escoria-core/game/core-scripts/esc_item.gd" type="Script" id=5]
 [ext_resource path="res://addons/escoria-core/game/core-scripts/esc_room.gd" type="Script" id=6]
 [ext_resource path="res://addons/escoria-core/game/core-scripts/esc_location.gd" type="Script" id=8]
-[ext_resource path="res://game/rooms/room03/room3chasm.png" type="Texture" id=10]
-[ext_resource path="res://game/rooms/room03/room3bridge.png" type="Texture" id=11]
-[ext_resource path="res://game/rooms/room03/room3background.png" type="Texture" id=12]
-[ext_resource path="res://game/rooms/room03/smoke.png" type="Texture" id=13]
-
-[sub_resource type="GDScript" id=15]
-script/source = "extends Node2D
-
-# Currently an empty array is passed as a parameter to the function. No parameters are required.
-func enable_door(_notused):
-	# Enable the collision polygon on the door so it is recognised as an ESCItem
-	$\"../CollisionPolygon2D\".disabled = false
-
-# Currently an empty array is passed as a parameter to the function. No parameters are required.
-func disable_door(_notused):
-	# Enable the collision polygon on the door so it is recognised as an ESCItem
-	$\"../CollisionPolygon2D\".disabled = true
-"
-
-[sub_resource type="Animation" id=10]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/path = NodePath("r3_bridge/Room3Bridge:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( 640, 249 ) ]
-}
-
-[sub_resource type="Animation" id=11]
-resource_name = "bridge_close"
-tracks/0/type = "value"
-tracks/0/path = NodePath("r3_bridge/Room3Bridge:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 1 ),
-"transitions": PoolRealArray( 0.318641, 1 ),
-"update": 0,
-"values": [ Vector2( 640, 249 ), Vector2( 640, 450 ) ]
-}
-
-[sub_resource type="Animation" id=12]
-resource_name = "bridge_open"
-tracks/0/type = "value"
-tracks/0/path = NodePath("r3_bridge/Room3Bridge:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 1 ),
-"transitions": PoolRealArray( 2.54912, 1 ),
-"update": 0,
-"values": [ Vector2( 640, 450 ), Vector2( 640, 249 ) ]
-}
-
-[sub_resource type="Gradient" id=5]
-offsets = PoolRealArray( 0, 0.830189 )
-colors = PoolColorArray( 1, 1, 1, 1, 0.353516, 0.353516, 0.353516, 1 )
-
-[sub_resource type="GradientTexture" id=2]
-gradient = SubResource( 5 )
-
-[sub_resource type="Curve" id=6]
-_data = [ Vector2( 0, 0.0886364 ), 0.0, 0.0, 0, 0, Vector2( 0.612766, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.770213, 0.95 ), -1.55372, -1.55372, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
-
-[sub_resource type="CurveTexture" id=4]
-curve = SubResource( 6 )
-
-[sub_resource type="ParticlesMaterial" id=7]
-lifetime_randomness = 0.2
-emission_shape = 1
-emission_sphere_radius = 1.0
-flag_disable_z = true
-gravity = Vector3( 0, -9.81, 0 )
-angular_velocity = 14.47
-orbit_velocity = 0.0
-orbit_velocity_random = 1.0
-radial_accel = 3.97
-radial_accel_random = 0.63
-angle = 160.0
-angle_random = 1.0
-scale = 0.5
-scale_random = 0.45
-scale_curve = SubResource( 4 )
-color_ramp = SubResource( 2 )
-
-[sub_resource type="Animation" id=8]
-resource_name = "button_broken"
-tracks/0/type = "value"
-tracks/0/path = NodePath("Particles2D:emitting")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ true ]
-}
-
-[sub_resource type="Animation" id=9]
-resource_name = "button_repaired"
-tracks/0/type = "value"
-tracks/0/path = NodePath("Particles2D:emitting")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ false ]
-}
+[ext_resource path="res://addons/escoria-core/game/core-scripts/esc_background.gd" type="Script" id=9]
+[ext_resource path="res://game/rooms/room03/scale.jpg" type="Texture" id=10]
+[ext_resource path="res://game/characters/mark/png/mark_talk_down.png" type="Texture" id=12]
+[ext_resource path="res://game/rooms/room03/fg.png" type="Texture" id=13]
 
 [sub_resource type="NavigationPolygon" id=13]
-vertices = PoolVector2Array( 1182, 379, 1184, 338, 1268, 391, 12, 385, 91, 344, 92, 383, 10, 542, 1270, 542, 116, 354, 1157, 357 )
-polygons = [ PoolIntArray( 0, 1, 2 ), PoolIntArray( 3, 4, 5, 6 ), PoolIntArray( 2, 7, 6, 0 ), PoolIntArray( 8, 9, 0, 6, 5 ) ]
-outlines = [ PoolVector2Array( 91, 344, 92, 383, 116, 354, 1157, 357, 1182, 379, 1184, 338, 1268, 391, 1270, 542, 10, 542, 12, 385 ) ]
+vertices = PoolVector2Array( 441, 602, 551, 640, 468, 760, 301, 661, 301, 568, 4, 746, 169, 661, 60, 439, 172, 559, 200, 405, 302, 435, 397, 509, 641, 659, 560, 618, 640, 638, 706, 656, 779, 647, 693, 630, 754, 627, 837, 627, 904, 658, 914, 640, 945, 666, 1008, 681, 1033, 717, 949, 705, 1038, 692 )
+polygons = [ PoolIntArray( 0, 1, 2, 3, 4 ), PoolIntArray( 3, 2, 5, 6 ), PoolIntArray( 6, 5, 7, 8 ), PoolIntArray( 4, 8, 7, 9, 10, 11 ), PoolIntArray( 4, 11, 0 ), PoolIntArray( 12, 1, 0, 13, 14, 15 ), PoolIntArray( 16, 15, 14, 17, 18, 19 ), PoolIntArray( 20, 16, 19, 21 ), PoolIntArray( 22, 20, 21 ), PoolIntArray( 22, 21, 23 ), PoolIntArray( 24, 25, 22, 23, 26 ) ]
+outlines = [ PoolVector2Array( 302, 435, 397, 509, 441, 602, 560, 618, 640, 638, 693, 630, 754, 627, 837, 627, 914, 640, 1008, 681, 1038, 692, 1033, 717, 949, 705, 945, 666, 904, 658, 779, 647, 706, 656, 641, 659, 551, 640, 468, 760, 4, 746, 60, 439, 200, 405 ), PoolVector2Array( 172, 559, 169, 661, 301, 661, 301, 568 ) ]
 
-[sub_resource type="NavigationPolygon" id=14]
-vertices = PoolVector2Array( 12, 387, 91, 340, 91, 383, 12, 541, 115, 354, 484, 356, 402, 541 )
-polygons = [ PoolIntArray( 0, 1, 2, 3 ), PoolIntArray( 4, 5, 6, 3, 2 ) ]
-outlines = [ PoolVector2Array( 91, 340, 91, 383, 115, 354, 484, 356, 402, 541, 12, 541, 12, 387 ) ]
+[sub_resource type="Shader" id=16]
+code = "shader_type canvas_item;
+
+uniform sampler2D noise_tex_normal;
+uniform sampler2D noise_tex;
+uniform float progress : hint_range(0.0, 1.0);
+uniform float strength = 1.0;
+
+// If your sprite doesn't have enough space and the explosion gets clipped, 
+// you can uncomment this and adjust the scale
+//void vertex() {
+//	float scale = 3.0;
+//	VERTEX *= scale;
+//
+//	UV *= scale;
+//	UV -= (scale - 1.0) / 2.0;
+//}
+
+void fragment() {
+	vec2 direction = texture(noise_tex_normal, UV).xy; // We're using normal map as direction
+	direction -= 0.5; // Since our normal map is a texture, it ranges from 0.0 to 1.0...
+	direction *= 2.0; // ...so we're going to make it range from -1.0 to 1.0.
+	direction = direction * strength * progress;
+	
+	// UV for exploded texture
+	vec2 tex_size = 1.0 / TEXTURE_PIXEL_SIZE; // Real texture size in pixels
+	vec2 uv = floor(UV * tex_size) / (tex_size - 1.0); // Pixelate UV to snap pixels
+	uv = uv - direction; // Distort UV
+	
+	// Texture with exploded UV
+	vec4 tex = texture(TEXTURE, uv); 
+	
+	// Dissolve alpha
+	float dissolve = texture(noise_tex, UV).x;
+	dissolve = step(progress, dissolve);
+	tex.a *= dissolve;
+	
+	// Border (in case the edge of your sprite stretches, otherwise you can remove this block)
+	vec2 border_uv = uv * 2.0 - 1.0;
+	border_uv = clamp(abs(border_uv), 0.0, 1.0);
+	float border = max(border_uv.x, border_uv.y);
+	border = ceil(1.0 - border);
+	tex.a *= border;
+	
+	COLOR = tex;
+}"
+
+[sub_resource type="OpenSimplexNoise" id=17]
+period = 0.1
+
+[sub_resource type="NoiseTexture" id=18]
+flags = 2
+width = 100
+height = 100
+noise = SubResource( 17 )
+
+[sub_resource type="OpenSimplexNoise" id=19]
+seed = 3454568
+period = 0.1
+
+[sub_resource type="NoiseTexture" id=20]
+flags = 2
+width = 100
+height = 100
+as_normalmap = true
+noise = SubResource( 19 )
+
+[sub_resource type="ShaderMaterial" id=21]
+shader = SubResource( 16 )
+shader_param/progress = 1.0
+shader_param/strength = 1.0
+shader_param/noise_tex_normal = SubResource( 20 )
+shader_param/noise_tex = SubResource( 18 )
+
+[sub_resource type="Animation" id=22]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:material:shader_param/progress")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1.0 ]
+}
+
+[sub_resource type="Animation" id=23]
+resource_name = "teleport_animation"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:material:shader_param/progress")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 1.0, 0.0 ]
+}
 
 [node name="room3" type="Node2D"]
 script = ExtResource( 6 )
 global_id = "room3"
-esc_script = "res://game/rooms/room03/esc/room03_bridge.esc"
+esc_script = "res://game/rooms/room03/esc/room03.esc"
 player_scene = ExtResource( 4 )
 camera_limits = [ Rect2( 0, 0, 1280, 555 ) ]
 
 [node name="Hotspots" type="Node2D" parent="."]
 
-[node name="r_platform" type="Area2D" parent="Hotspots"]
-pause_mode = 1
-script = ExtResource( 5 )
-__meta__ = {
-"_editor_description_": ""
-}
-global_id = "r3_right_platform"
-esc_script = "res://game/rooms/room03/esc/right_platform.esc"
-combine_when_selected_action_is_in = [  ]
-dialog_color = Color( 1, 1, 1, 1 )
-animations = null
+[node name="ESCBackground" type="TextureRect" parent="."]
+margin_right = 1280.0
+margin_bottom = 550.0
+mouse_filter = 2
+texture = ExtResource( 2 )
+script = ExtResource( 9 )
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Hotspots/r_platform"]
-position = Vector2( -21, -3 )
-polygon = PoolVector2Array( 890, 546, 818, 359, 1181.4, 357.174, 1194, 368, 1195, 67, 1300, 112, 1298, 428, 1301, 547 )
-__meta__ = {
-"_editor_description_": ""
-}
-
-[node name="Position2D" type="Position2D" parent="Hotspots/r_platform"]
-position = Vector2( 430.893, 451.052 )
-script = ExtResource( 8 )
-__meta__ = {
-"_editor_description_": ""
-}
-
-[node name="r_door" type="Area2D" parent="Hotspots"]
-pause_mode = 1
-script = ExtResource( 5 )
-__meta__ = {
-"_editor_description_": ""
-}
-global_id = "r3_r_exit"
-esc_script = "res://game/rooms/room03/esc/right_exit.esc"
-is_exit = true
-is_interactive = false
-tooltip_name = "Exit"
-combine_when_selected_action_is_in = [  ]
-dialog_color = Color( 1, 1, 1, 1 )
-animations = null
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Hotspots/r_door"]
-polygon = PoolVector2Array( 1174, 356, 1177, 68, 1278, 110, 1279, 419 )
-disabled = true
-
-[node name="Position2D" type="Position2D" parent="Hotspots/r_door"]
-position = Vector2( 1223, 376 )
-script = ExtResource( 8 )
-
-[node name="door_enabler" type="Node2D" parent="Hotspots/r_door"]
-script = SubResource( 15 )
-
-[node name="l_door" type="Area2D" parent="Hotspots"]
-pause_mode = 1
-script = ExtResource( 5 )
-__meta__ = {
-"_editor_description_": ""
-}
-global_id = "r3_l_exit"
-esc_script = "res://game/rooms/room03/esc/left_exit.esc"
-is_exit = true
-tooltip_name = "Exit"
-combine_when_selected_action_is_in = [  ]
-dialog_color = Color( 1, 1, 1, 1 )
-animations = null
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Hotspots/l_door"]
-polygon = PoolVector2Array( 3, 422, 6, 108, 102, 70, 103, 357 )
-
-[node name="Position2D" type="Position2D" parent="Hotspots/l_door"]
-position = Vector2( 44.1375, 384.691 )
-script = ExtResource( 8 )
-
-[node name="player_start" type="Position2D" parent="."]
-position = Vector2( 63.3074, 444.653 )
-script = ExtResource( 8 )
-global_id = "r3_player_start"
-is_start_location = true
-
-[node name="r3_bridge" type="Area2D" parent="."]
-pause_mode = 1
-script = ExtResource( 5 )
-global_id = "r3_bridge"
-esc_script = "res://game/rooms/room03/esc/room03_bridge.esc"
-combine_when_selected_action_is_in = [  ]
-inventory_texture = ExtResource( 10 )
-dialog_color = Color( 1, 1, 1, 1 )
-animations = null
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="r3_bridge"]
-root_node = NodePath("../..")
-anims/RESET = SubResource( 10 )
-anims/bridge_close = SubResource( 11 )
-anims/bridge_open = SubResource( 12 )
-
-[node name="Room3Chasm" type="Sprite" parent="r3_bridge"]
-position = Vector2( 640, 450 )
-texture = ExtResource( 10 )
-
-[node name="Room3Bridge" type="Sprite" parent="r3_bridge"]
-position = Vector2( 640, 249 )
-texture = ExtResource( 11 )
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="r3_bridge"]
-polygon = PoolVector2Array( 501, 349, 780, 351, 859, 548, 419, 551 )
-
-[node name="ESCLocation" type="Position2D" parent="r3_bridge"]
-position = Vector2( 434, 441 )
-script = ExtResource( 8 )
-
-[node name="Room3Background" type="Sprite" parent="."]
-texture = ExtResource( 12 )
-centered = false
-
-[node name="Polygon2D" type="Polygon2D" parent="Room3Background"]
-color = Color( 0, 0, 0, 1 )
-polygon = PoolVector2Array( 0, 550, 1280, 550, 1280, 800, 0, 800 )
-
-[node name="room_label2" type="Label" parent="Room3Background"]
-margin_left = 17.0
-margin_top = 558.0
-margin_right = 1224.0
-margin_bottom = 627.0
-custom_fonts/font = ExtResource( 3 )
-text = "Room  3 demonstrates a chain of steps to complete a game task. It demonstrates different talk responses based on the  state of the button (which sets the
- \"broken_button\" variable to true or false respectively). Setting the \"button_repaired\" state automatically plays the button_repaired animation, which turns off
-the particle emitter for the button. The custom command shows how to execute functions written in gdscript."
-
-[node name="room_label" type="Label" parent="Room3Background"]
+[node name="room_label" type="Label" parent="ESCBackground"]
 margin_right = 82.0
 margin_bottom = 21.0
 custom_fonts/font = ExtResource( 3 )
 text = "ROOM 3"
-
-[node name="r3_button" type="Area2D" parent="."]
-pause_mode = 1
-script = ExtResource( 5 )
-global_id = "r3_button"
-esc_script = "res://game/rooms/room03/esc/button.esc"
-tooltip_name = "Button"
-default_action = "use"
-combine_when_selected_action_is_in = [  ]
-dialog_color = Color( 1, 1, 1, 1 )
-animations = null
-
-[node name="Particles2D" type="Particles2D" parent="r3_button"]
-position = Vector2( 374, 154 )
-emitting = false
-amount = 16
-lifetime = 4.0
-preprocess = 1.99
-speed_scale = 1.39
-process_material = SubResource( 7 )
-texture = ExtResource( 13 )
-__meta__ = {
-"_editor_description_": ""
-}
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="r3_button"]
-anims/button_broken = SubResource( 8 )
-anims/button_repaired = SubResource( 9 )
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="r3_button"]
-position = Vector2( 24, 41 )
-polygon = PoolVector2Array( 317, 120, 317, 181, 379, 181, 380, 119 )
-
-[node name="ESCLocation" type="Position2D" parent="r3_button"]
-position = Vector2( 349, 380 )
-script = ExtResource( 8 )
-
-[node name="button_label" type="Label" parent="r3_button"]
-margin_left = 420.0
-margin_top = 158.0
-margin_right = 745.0
-margin_bottom = 203.0
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-custom_fonts/font = ExtResource( 3 )
-text = "I know, this isn't logical - but you
-should try talking to this button..."
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="ESCTerrain" type="Navigation2D" parent="."]
 script = ExtResource( 1 )
+scales = ExtResource( 10 )
+scale_min = 0.2
+scale_max = 0.4
+player_doubleclick_speed_multiplier = 20.0
 
-[node name="bridge_closed" type="NavigationPolygonInstance" parent="ESCTerrain"]
+[node name="navigation_polygon" type="NavigationPolygonInstance" parent="ESCTerrain"]
 navpoly = SubResource( 13 )
-enabled = false
 
-[node name="bridge_open" type="NavigationPolygonInstance" parent="ESCTerrain"]
-navpoly = SubResource( 14 )
+[node name="ESCItem" type="Area2D" parent="."]
+pause_mode = 1
+position = Vector2( 66, 405 )
+script = ExtResource( 5 )
+global_id = "mark_teleport"
+is_movable = true
+combine_when_selected_action_is_in = [  ]
+inventory_texture = ExtResource( 12 )
+dialog_color = Color( 1, 1, 1, 1 )
+animations = null
+
+[node name="Sprite" type="Sprite" parent="ESCItem"]
+material = SubResource( 21 )
+scale = Vector2( 3.6, 3.6 )
+texture = ExtResource( 12 )
+centered = false
+offset = Vector2( -12, -68.4 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 24, 70 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="ESCItem"]
+anims/RESET = SubResource( 22 )
+anims/teleport_animation = SubResource( 23 )
+
+[node name="portal_start" type="Position2D" parent="."]
+position = Vector2( 198, 415 )
+script = ExtResource( 8 )
+global_id = "portal_start"
+is_start_location = true
+interaction_direction = 4
+
+[node name="player_start" type="Position2D" parent="."]
+position = Vector2( 198, 463 )
+script = ExtResource( 8 )
+global_id = "r3_player_start"
+interaction_direction = 4
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 657, 668 )
+z_index = 800
+texture = ExtResource( 13 )

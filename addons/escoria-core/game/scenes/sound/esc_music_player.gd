@@ -44,8 +44,13 @@ func set_state(p_state: String, p_force: bool = false) -> void:
 			resource.loop_end = resource.mix_rate * resource.get_length()
 		elif "loop" in resource:
 			resource.loop = true
-		stream.play()
+		stream.play()				
 
+func set_volume(vol):
+	stream.volume_db = vol
+	
+func get_volume():
+	return stream.volume_db
 
 # Register to the object registry
 func _ready():

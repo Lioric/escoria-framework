@@ -120,8 +120,9 @@ static func remove_setting(name: String) -> void:
 # *Returns* the value of the project setting located with key.
 static func get_setting(key: String):
 	if not ProjectSettings.has_setting(key):
+		set_setting(key, "")
 		push_error("Parameter %s is not set!" % key)
-		assert(false)
+#		assert(false)
 
 	return ProjectSettings.get_setting(key)
 
