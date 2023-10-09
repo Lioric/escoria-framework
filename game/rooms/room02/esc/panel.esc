@@ -1,0 +1,10 @@
+:look
+say player "It's the control panel of the teleportation device."
+
+:use
+set_global portal_active false
+spawn control_panel "res://game/rooms/room02/panel/panel.tscn" true panel_location
+stop
+
+> [portal_active]
+	say player "I REALLY don't know what that stuff is." 

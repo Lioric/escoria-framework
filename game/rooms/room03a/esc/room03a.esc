@@ -1,0 +1,13 @@
+:setup
+set_active player false
+teleport mark_teleport portal_start
+teleport player portal_start
+# Set player look down
+set_angle player 180
+stop
+
+:ready
+anim_block mark_teleport teleport_animation
+set_active player true
+set_active mark_teleport false
+walk player r3_player_start

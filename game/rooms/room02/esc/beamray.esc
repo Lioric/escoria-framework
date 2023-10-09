@@ -1,0 +1,38 @@
+:look
+say player "The teleporter is active"
+
+:activate
+set_angle player 280
+set_active beamray true
+anim_block beamray activate
+walk_block player bean_activation_location
+say player "Look! it works"
+set_angle player 180
+stop
+
+:use
+walk_block player teleport_location
+wait 1
+anim beamray teleport_start
+play_snd res://game/rooms/room02/sfx/teleport.ogg
+wait 2.8
+set_active player false
+set_angle player 180
+wait 3
+
+> [!portal_correct_coordinates]
+	camera_set_pos_block 1 640 450
+	teleport player swim_location
+	play_snd res://game/rooms/room02/sfx/splash.ogg
+	anim_block waterfall_teleport_anim drop_in_water
+	wait 1
+	set_active player true
+	walk_block player r2_player_start
+	set_angle player 180
+	say player "I guess those were not the correct coordinates"
+	set_angle player 90
+	camera_set_target 0 player
+	
+> [portal_correct_coordinates]	
+	change_scene "res://game/rooms/room03/room03.tscn"
+stop

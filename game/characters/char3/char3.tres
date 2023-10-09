@@ -1,0 +1,92 @@
+[gd_resource type="Resource" load_steps=19 format=2]
+
+[ext_resource path="res://addons/escoria-core/game/core-scripts/resources/esc_animationresource.gd" type="Script" id=1]
+[ext_resource path="res://addons/escoria-core/game/core-scripts/resources/esc_directionangle.gd" type="Script" id=2]
+[ext_resource path="res://addons/escoria-core/game/core-scripts/resources/esc_animationname.gd" type="Script" id=3]
+
+[sub_resource type="Resource" id=17]
+script = ExtResource( 2 )
+angle_start = 45
+angle_size = 90
+
+[sub_resource type="Resource" id=18]
+script = ExtResource( 2 )
+angle_start = 225
+angle_size = 90
+
+[sub_resource type="Resource" id=27]
+script = ExtResource( 2 )
+angle_start = 315
+angle_size = 90
+
+[sub_resource type="Resource" id=28]
+script = ExtResource( 2 )
+angle_start = 135
+angle_size = 90
+
+[sub_resource type="Resource" id=19]
+script = ExtResource( 3 )
+animation = "walk_lateral"
+mirrored = false
+
+[sub_resource type="Resource" id=20]
+script = ExtResource( 3 )
+animation = "walk_lateral"
+mirrored = true
+
+[sub_resource type="Resource" id=33]
+script = ExtResource( 3 )
+animation = "walk_lateral"
+mirrored = false
+
+[sub_resource type="Resource" id=34]
+script = ExtResource( 3 )
+animation = "walk_lateral"
+mirrored = false
+
+[sub_resource type="Resource" id=22]
+script = ExtResource( 3 )
+animation = "idle_lateral"
+mirrored = false
+
+[sub_resource type="Resource" id=26]
+script = ExtResource( 3 )
+animation = "idle_lateral"
+mirrored = true
+
+[sub_resource type="Resource" id=29]
+script = ExtResource( 3 )
+animation = "idle_lateral"
+mirrored = false
+
+[sub_resource type="Resource" id=30]
+script = ExtResource( 3 )
+animation = "idle_lateral"
+mirrored = false
+
+[sub_resource type="Resource" id=21]
+script = ExtResource( 3 )
+animation = "idle_lateral"
+mirrored = false
+
+[sub_resource type="Resource" id=23]
+script = ExtResource( 3 )
+animation = "idle_lateral"
+mirrored = true
+
+[sub_resource type="Resource" id=31]
+script = ExtResource( 3 )
+animation = "idle_lateral"
+mirrored = false
+
+[sub_resource type="Resource" id=32]
+script = ExtResource( 3 )
+animation = "idle_lateral"
+mirrored = false
+
+[resource]
+script = ExtResource( 1 )
+dir_angles = [ SubResource( 17 ), SubResource( 18 ), SubResource( 27 ), SubResource( 28 ) ]
+directions = [ SubResource( 19 ), SubResource( 20 ), SubResource( 33 ), SubResource( 34 ) ]
+idles = [ SubResource( 22 ), SubResource( 26 ), SubResource( 29 ), SubResource( 30 ) ]
+speaks = [ SubResource( 21 ), SubResource( 23 ), SubResource( 31 ), SubResource( 32 ) ]

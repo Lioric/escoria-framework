@@ -1,0 +1,46 @@
+:look
+	say player ROOM1_look_wall_item_1:"I don't know what that stuff is."
+	
+:push
+>[push_space_ship_text]
+	say player "Let's see you trying to move it"
+> [!push_space_ship_text]
+	say player "You are kidding right?"
+	set_global push_space_ship_text true
+	
+:use
+say player "To use a space ship I suppose first I need the keys" [!i/key]
+say player "I have the key, can try using it" [i/key]
+
+:use key
+say player "It seems the space ship needs to be repaired before it can be activated" [!space_ship_fixed]
+
+> [space_ship_fixed]
+	set_cinematic_mode true
+	inventory_remove key
+	set_global space_ship_takeoff true
+	play_snd res://game/rooms/room01/sfx/takeoff.ogg
+	wait 1.5
+	anim_block spaceship fly
+	anim spaceship hover
+	wait 2
+	set_angle player 180 0.4
+	wait 1
+	say player ROOM1_look_wall_item_2:"I REALLY don't know what that stuff is." avatar
+	set_cinematic_mode false
+
+:use wrench
+say player "Its already fixed, why would you want to fix something that is already working?" [space_ship_fixed]
+
+> [!space_ship_fixed]
+	walk_block player wrenching_location
+	play_snd res://game/rooms/room01/sfx/wrenching.ogg 
+	inventory_remove wrench
+	set_global space_ship_fixed true
+	wait 5.4
+	set_angle player 180 0
+	say player "Like new!"
+
+	
+
+

@@ -1,0 +1,201 @@
+[gd_scene load_steps=21 format=2]
+
+[ext_resource path="res://addons/escoria-core/game/core-scripts/esc_terrain.gd" type="Script" id=1]
+[ext_resource path="res://game/rooms/room03/background.png" type="Texture" id=2]
+[ext_resource path="res://game/fonts/caslonantique.tres" type="DynamicFont" id=3]
+[ext_resource path="res://game/characters/mark/mark.tscn" type="PackedScene" id=4]
+[ext_resource path="res://addons/escoria-core/game/core-scripts/esc_item.gd" type="Script" id=5]
+[ext_resource path="res://addons/escoria-core/game/core-scripts/esc_room.gd" type="Script" id=6]
+[ext_resource path="res://addons/escoria-core/game/core-scripts/esc_location.gd" type="Script" id=8]
+[ext_resource path="res://addons/escoria-core/game/core-scripts/esc_background.gd" type="Script" id=9]
+[ext_resource path="res://game/rooms/room03/scale.jpg" type="Texture" id=10]
+[ext_resource path="res://game/characters/mark/png/mark_talk_down.png" type="Texture" id=12]
+[ext_resource path="res://game/rooms/room03/fg.png" type="Texture" id=13]
+
+[sub_resource type="NavigationPolygon" id=13]
+vertices = PoolVector2Array( 468, 760, 4, 746, 60, 439, 200, 405, 302, 435, 397, 509, 441, 602, 551, 640, 560, 618, 641, 659, 640, 638, 706, 656, 779, 647, 693, 630, 754, 627, 837, 627, 904, 658, 914, 640, 945, 666, 1008, 681, 1033, 717, 949, 705, 1038, 692 )
+polygons = [ PoolIntArray( 0, 1, 2, 3, 4, 5, 6 ), PoolIntArray( 7, 0, 6, 8 ), PoolIntArray( 9, 7, 8, 10, 11 ), PoolIntArray( 12, 11, 10, 13, 14, 15 ), PoolIntArray( 16, 12, 15, 17 ), PoolIntArray( 18, 16, 17 ), PoolIntArray( 18, 17, 19 ), PoolIntArray( 20, 21, 18, 19, 22 ) ]
+outlines = [ PoolVector2Array( 302, 435, 397, 509, 441, 602, 560, 618, 640, 638, 693, 630, 754, 627, 837, 627, 914, 640, 1008, 681, 1038, 692, 1033, 717, 949, 705, 945, 666, 904, 658, 779, 647, 706, 656, 641, 659, 551, 640, 468, 760, 4, 746, 60, 439, 200, 405 ) ]
+
+[sub_resource type="Shader" id=16]
+code = "shader_type canvas_item;
+
+uniform sampler2D noise_tex_normal;
+uniform sampler2D noise_tex;
+uniform float progress : hint_range(0.0, 1.0);
+uniform float strength = 1.0;
+
+// If your sprite doesn't have enough space and the explosion gets clipped, 
+// you can uncomment this and adjust the scale
+//void vertex() {
+//	float scale = 3.0;
+//	VERTEX *= scale;
+//
+//	UV *= scale;
+//	UV -= (scale - 1.0) / 2.0;
+//}
+
+void fragment() {
+	vec2 direction = texture(noise_tex_normal, UV).xy; // We're using normal map as direction
+	direction -= 0.5; // Since our normal map is a texture, it ranges from 0.0 to 1.0...
+	direction *= 2.0; // ...so we're going to make it range from -1.0 to 1.0.
+	direction = direction * strength * progress;
+	
+	// UV for exploded texture
+	vec2 tex_size = 1.0 / TEXTURE_PIXEL_SIZE; // Real texture size in pixels
+	vec2 uv = floor(UV * tex_size) / (tex_size - 1.0); // Pixelate UV to snap pixels
+	uv = uv - direction; // Distort UV
+	
+	// Texture with exploded UV
+	vec4 tex = texture(TEXTURE, uv); 
+	
+	// Dissolve alpha
+	float dissolve = texture(noise_tex, UV).x;
+	dissolve = step(progress, dissolve);
+	tex.a *= dissolve;
+	
+	// Border (in case the edge of your sprite stretches, otherwise you can remove this block)
+	vec2 border_uv = uv * 2.0 - 1.0;
+	border_uv = clamp(abs(border_uv), 0.0, 1.0);
+	float border = max(border_uv.x, border_uv.y);
+	border = ceil(1.0 - border);
+	tex.a *= border;
+	
+	COLOR = tex;
+}"
+
+[sub_resource type="OpenSimplexNoise" id=17]
+period = 0.1
+
+[sub_resource type="NoiseTexture" id=18]
+flags = 2
+width = 100
+height = 100
+noise = SubResource( 17 )
+
+[sub_resource type="OpenSimplexNoise" id=19]
+seed = 3454568
+period = 0.1
+
+[sub_resource type="NoiseTexture" id=20]
+flags = 2
+width = 100
+height = 100
+as_normalmap = true
+noise = SubResource( 19 )
+
+[sub_resource type="ShaderMaterial" id=21]
+shader = SubResource( 16 )
+shader_param/progress = 1.0
+shader_param/strength = 1.0
+shader_param/noise_tex_normal = SubResource( 20 )
+shader_param/noise_tex = SubResource( 18 )
+
+[sub_resource type="Animation" id=22]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:material:shader_param/progress")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1.0 ]
+}
+
+[sub_resource type="Animation" id=23]
+resource_name = "teleport_animation"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:material:shader_param/progress")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 1.0, 0.0 ]
+}
+
+[node name="room3" type="Node2D"]
+script = ExtResource( 6 )
+global_id = "room3"
+esc_script = "res://game/rooms/room03/esc/room03.esc"
+player_scene = ExtResource( 4 )
+camera_limits = [ Rect2( 0, 0, 1280, 555 ) ]
+
+[node name="Hotspots" type="Node2D" parent="."]
+
+[node name="ESCBackground" type="TextureRect" parent="."]
+margin_right = 1280.0
+margin_bottom = 550.0
+mouse_filter = 2
+texture = ExtResource( 2 )
+script = ExtResource( 9 )
+
+[node name="room_label" type="Label" parent="ESCBackground"]
+margin_right = 82.0
+margin_bottom = 21.0
+custom_fonts/font = ExtResource( 3 )
+text = "ROOM 3"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ESCTerrain" type="Navigation2D" parent="."]
+script = ExtResource( 1 )
+scales = ExtResource( 10 )
+scale_min = 0.2
+scale_max = 0.4
+player_doubleclick_speed_multiplier = 20.0
+debug_mode = 1
+
+[node name="navigation_polygon" type="NavigationPolygonInstance" parent="ESCTerrain"]
+visible = false
+navpoly = SubResource( 13 )
+
+[node name="ESCItem" type="Area2D" parent="."]
+pause_mode = 1
+position = Vector2( 66, 405 )
+script = ExtResource( 5 )
+global_id = "mark_teleport"
+is_movable = true
+combine_when_selected_action_is_in = [  ]
+inventory_texture = ExtResource( 12 )
+dialog_color = Color( 1, 1, 1, 1 )
+animations = null
+
+[node name="Sprite" type="Sprite" parent="ESCItem"]
+material = SubResource( 21 )
+scale = Vector2( 3.6, 3.6 )
+texture = ExtResource( 12 )
+centered = false
+offset = Vector2( -12, -68.4 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 24, 70 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="ESCItem"]
+anims/RESET = SubResource( 22 )
+anims/teleport_animation = SubResource( 23 )
+
+[node name="portal_start" type="Position2D" parent="."]
+position = Vector2( 198, 415 )
+script = ExtResource( 8 )
+global_id = "portal_start"
+is_start_location = true
+interaction_direction = 4
+
+[node name="player_start" type="Position2D" parent="."]
+position = Vector2( 198, 463 )
+script = ExtResource( 8 )
+global_id = "r3_player_start"
+interaction_direction = 4
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 657, 668 )
+z_index = 800
+texture = ExtResource( 13 )

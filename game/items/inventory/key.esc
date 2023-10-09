@@ -1,0 +1,9 @@
+:look
+say player "It looks like the keys of a space ship.... not that I know what a space ship keys looks like"
+stop
+
+:pickup
+inventory_add key
+set_active key false
+play_snd res://game/sfx/pickup.ogg 
+stop
