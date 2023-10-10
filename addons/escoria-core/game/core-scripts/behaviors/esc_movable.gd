@@ -42,6 +42,8 @@ var is_mirrored: bool
 
 var _orig_speed: float = 0.0
 
+var animationCycle: int = 0
+var useAnimLoop: bool
 
 # Shortcut variable that references the node's parent
 onready var parent = get_parent()
@@ -49,7 +51,6 @@ onready var parent = get_parent()
 
 # Currenly running task
 onready var task = MovableTask.NONE
-
 
 # Add the signal "arrived" to the parent node, which is emitted when
 # the destination position was reached
@@ -152,9 +153,21 @@ func _perform_walk_orientation(angle: float):
 
 	var animation_to_play = \
 			parent.animations.directions[last_dir].animation
+
+	var animationLoop = animation_to_play + "_loop"
+
+	if animationCycle > 0 and not current_animation:
+		if animation_player.has_animation(animationLoop):
+			useAnimLoop = true
+
+	if useAnimLoop:
+		animation_to_play = animationLoop
+
 	if current_animation != animation_to_play and \
 			animation_player.has_animation(animation_to_play):
+
 		animation_player.play(animation_to_play)
+		animationCycle += 1
 	elif current_animation != animation_to_play and \
 			not animation_player.has_animation(animation_to_play):
 		current_animation = animation_to_play
@@ -260,6 +273,8 @@ func walk_stop(pos: Vector2) -> void:
 
 	task = MovableTask.NONE
 	moved = false
+	animationCycle = 0
+	useAnimLoop = false
 	set_process(false)
 
 	# If we're heading to an object and reached its interaction position,
