@@ -87,7 +87,8 @@ func do(action: int, params: Array = [], can_interrupt: bool = false) -> void:
 		match action:
 			ACTION.BACKGROUND_CLICK:
 				if can_interrupt:
-					escoria.event_manager.interrupt()
+					# Dont interrupt walking animation to avoid jerky animations
+					escoria.event_manager.interrupt([], false)
 
 				var walk_fast = false
 				if params.size() > 2:
@@ -128,11 +129,18 @@ func do(action: int, params: Array = [], can_interrupt: bool = false) -> void:
 					)
 
 					if can_interrupt:
-						escoria.event_manager.interrupt()
+						escoria.event_manager.interrupt([], false)
 
 					var item = escoria.object_manager.get_object(params[0])
 
-					self.perform_inputevent_on_object(item, params[1])
+					var res = [0]
+					self.perform_inputevent_on_object(item, params[1], false, res)
+					if res[0] == ESCEvent.FLAG_TK:
+					#if typeof(event_flags) == TYPE_INT and event_flags & ESCEvent.FLAG_TK:
+						if escoria.main.current_scene != null \
+								and escoria.main.current_scene.player != null \
+								and escoria.main.current_scene.player.is_moving():
+							escoria.main.current_scene.player.stop_walking_now()
 
 			ACTION.ITEM_RIGHT_CLICK:
 				if params[0] is String:
@@ -142,11 +150,18 @@ func do(action: int, params: Array = [], can_interrupt: bool = false) -> void:
 					)
 
 					if can_interrupt:
-						escoria.event_manager.interrupt()
+						escoria.event_manager.interrupt([], false)
 
 					var item = escoria.object_manager.get_object(params[0])
 
-					self.perform_inputevent_on_object(item, params[1], true)
+					var res = [0]
+					self.perform_inputevent_on_object(item, params[1], true, res)
+					if res[0] == ESCEvent.FLAG_TK:
+					#if typeof(event_flags) == TYPE_INT and event_flags & ESCEvent.FLAG_TK:
+						if escoria.main.current_scene != null \
+								and escoria.main.current_scene.player != null \
+								and escoria.main.current_scene.player.is_moving():
+							escoria.main.current_scene.player.stop_walking_now()
 
 			ACTION.TRIGGER_IN:
 				var trigger_id = params[0]
@@ -453,7 +468,8 @@ func perform_walk(
 func perform_inputevent_on_object(
 	obj: ESCObject,
 	event: InputEvent,
-	default_action: bool = false
+	default_action: bool = false,
+	res = []
 ):
 	"""
 	This algorithm:
@@ -556,6 +572,8 @@ func perform_inputevent_on_object(
 	if current_action and not event_to_queue:
 		clear_current_action()
 		emit_signal("action_finished")
+		if res:
+			res[0] = ESCEvent.FLAG_TK
 		return
 
 	var event_flags = event_to_queue.flags if event_to_queue else 0
@@ -573,6 +591,9 @@ func perform_inputevent_on_object(
 					event.position,
 					event.doubleclick
 				)
+
+				if res:
+					res[0] = 0
 
 				if context is GDScriptFunctionState:
 					context = yield(context, "completed")
@@ -610,6 +631,9 @@ func perform_inputevent_on_object(
 	if not dont_interact and event_to_queue:
 		_run_event(event_to_queue)
 
+	if res:
+		res[0] = event_flags
+	#return event_flags
 
 # Determines whether the object in question can be acted upon.
 #
