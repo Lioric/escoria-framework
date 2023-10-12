@@ -571,6 +571,15 @@ func perform_inputevent_on_object(
 	# player walking towards the destination.
 	if current_action and not event_to_queue:
 		clear_current_action()
+		
+		var esc = """
+:default
+	say player "%s"
+		"""
+		esc = esc % [getDefaultEventText()]
+		var script = escoria.esc_compiler.compile(esc.split("\n"))
+		escoria.event_manager.queue_event_from_esc(script, "default", "_front", false)
+		
 		emit_signal("action_finished")
 		if res:
 			res[0] = ESCEvent.FLAG_TK
@@ -635,6 +644,21 @@ func perform_inputevent_on_object(
 		res[0] = event_flags
 	#return event_flags
 
+
+var defaultText = []
+func getDefaultEventText() -> String:	
+	if defaultText.size() == 0:
+		var file = File.new()
+		file.open("res://game/default.txt", File.READ)
+		while not file.eof_reached():
+			defaultText.append(file.get_line())
+	
+	if defaultText.size():
+		return defaultText[randi() % defaultText.size()]
+		
+	return ""
+		
+		
 # Determines whether the object in question can be acted upon.
 #
 # #### Parameters
