@@ -160,9 +160,17 @@ func element_focused(element_id: String) -> void:
 		ESCActionManager.ACTION_INPUT_STATE.COMPLETED:
 			return
 
-		ESCActionManager.ACTION_INPUT_STATE.AWAITING_VERB_OR_ITEM, \
+		ESCActionManager.ACTION_INPUT_STATE.AWAITING_VERB_OR_ITEM:
+			tooltip.set_target(target_obj.tooltip_name)
+
+			# Hovering an ESCItem highlights its default action
+			if escoria.action_manager.current_action != VERB_USE \
+					and target_obj is ESCItem:
+				verbs_menu.set_by_name(target_obj.default_action)
 		ESCActionManager.ACTION_INPUT_STATE.AWAITING_ITEM:
 			tooltip.set_target(target_obj.tooltip_name)
+
+			verbs_menu.set_by_name(escoria.action_manager.current_action)
 
 		ESCActionManager.ACTION_INPUT_STATE.AWAITING_TARGET_ITEM:
 			tooltip.set_target2(target_obj.tooltip_name)
@@ -220,6 +228,14 @@ func left_click_on_item(item_global_id: String, event: InputEvent) -> void:
 
 
 func right_click_on_item(item_global_id: String, event: InputEvent) -> void:
+	element_focused(item_global_id)
+	var object = escoria.object_manager.get_object(item_global_id)
+	if object != null:
+		verbs_menu.set_by_name(object.node.default_action)
+
+	if verbs_menu.selected_action == null:
+		return
+		
 	escoria.action_manager.set_current_action(verbs_menu.selected_action)
 	escoria.action_manager.do(
 		escoria.action_manager.ACTION.ITEM_RIGHT_CLICK,
