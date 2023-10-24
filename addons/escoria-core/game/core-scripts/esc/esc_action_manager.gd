@@ -589,9 +589,11 @@ func perform_inputevent_on_object(
 :default
 	say player "%s"
 		"""
-		esc = esc % [getDefaultEventText()]
-		var script = escoria.esc_compiler.compile(esc.split("\n"))
-		escoria.event_manager.queue_event_from_esc(script, "default", "_front", false)
+		var text = getDefaultEventText()
+		if text:
+			esc = esc % [getDefaultEventText()]
+			var script = escoria.esc_compiler.compile(esc.split("\n"))
+			escoria.event_manager.queue_event_from_esc(script, "default", "_front", false)
 		
 		emit_signal("action_finished")
 		if res:
@@ -662,9 +664,10 @@ var defaultText = []
 func getDefaultEventText() -> String:	
 	if defaultText.size() == 0:
 		var file = File.new()
-		file.open("res://game/default.txt", File.READ)
-		while not file.eof_reached():
-			defaultText.append(file.get_line())
+		var err = file.open("res://game/default.txt", File.READ)
+		if err == OK:
+			while not file.eof_reached():
+				defaultText.append(file.get_line())
 	
 	if defaultText.size():
 		return defaultText[randi() % defaultText.size()]
