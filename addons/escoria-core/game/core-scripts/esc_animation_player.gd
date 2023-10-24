@@ -83,6 +83,8 @@ func is_playing() -> bool:
 func stop():
 	_player_node.stop()
 
+func set_speed(speed):
+	_animation_player.playback_speed = speed
 
 # Play the animation
 #

@@ -163,6 +163,8 @@ func _perform_walk_orientation(angle: float):
 	if useAnimLoop:
 		animation_to_play = animationLoop
 
+	animation_player.set_speed(parent.terrain.player_doubleclick_speed_multiplier if walk_context.fast else 1)
+
 	if current_animation != animation_to_play and \
 			animation_player.has_animation(animation_to_play):
 
