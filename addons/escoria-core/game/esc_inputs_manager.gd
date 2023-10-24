@@ -51,6 +51,8 @@ var custom_input_handler = null
 # The currently hovered element. Usually the one on top of the hover stack.
 var _hovered_element = null
 
+var _highlightShader = preload("res://addons/escoria-core/game/assets/shaders/highlight.tres")
+
 
 # Constructor
 func _init():
@@ -363,6 +365,7 @@ func _on_mouse_exited_inventory_item() -> void:
 	escoria.main.current_scene.game.inventory_item_unfocused()
 
 
+var _cur_item_highlight : Polygon2D = null
 # The mouse entered an Escoria item
 #
 # #### Parameters
@@ -393,6 +396,66 @@ func _on_mouse_entered_item(item: ESCItem) -> void:
 		self,
 		"Item focused: %s" % item.global_id
 	)
+	
+	if _cur_item_highlight:
+		_cur_item_highlight.get_parent().remove_child(_cur_item_highlight)
+		#escoria.main.current_scene.remove_child(_cur_item_highlight);
+		_cur_item_highlight = null
+	
+	# Highlight item
+	var sprite = item._sprite_node
+	if not sprite:
+		sprite = item.get_node("Sprite")
+		
+#	if sprite:
+#		var mat = ShaderMaterial.new()
+#		mat.shader = _highlightShader
+#		sprite.material = mat
+#
+#	else:
+	var col = item.collision		
+	if col is CollisionPolygon2D:
+		_cur_item_highlight = Polygon2D.new()
+		var pos = []
+		
+		var points = col.polygon
+		
+		for point in points:
+			pos.append(point)
+			
+		_cur_item_highlight.set_polygon(pos)
+		_cur_item_highlight.transform = col.transform
+		_cur_item_highlight.color = Color(1, 0, 0, 0.02)
+		_cur_item_highlight.modulate = Color(68, 56, 46, 0.32)
+		_cur_item_highlight.self_modulate = Color(13, 18, 45, 1)
+		
+		col.get_parent().add_child(_cur_item_highlight)
+#		if sprite:
+#			sprite.add_child(_cur_item_highlight)
+#			_cur_item_highlight.show_behind_parent = true
+#		else:
+#			col.get_parent().add_child(_cur_item_highlight)
+		
+		var wenv = null
+		var ev = null
+		for node in escoria.main.current_scene.get_children():			
+			if node is WorldEnvironment:
+				wenv = node
+				ev = node.environment
+		
+		if not wenv:				
+			wenv = WorldEnvironment.new()
+			escoria.main.current_scene.add_child(wenv)
+		
+		if not ev:	
+			ev = Environment.new()
+			wenv.environment = ev
+			
+		ev.glow_enabled = true
+		ev.glow_intensity = 0.8
+		ev.glow_strength = 0.45		
+		ev.glow_blend_mode = Environment.GLOW_BLEND_MODE_ADDITIVE
+		ev.background_mode = Environment.BG_CANVAS											
 
 	hotspot_focused = item.global_id
 	escoria.main.current_scene.game.element_focused(item.global_id)
@@ -420,6 +483,14 @@ func _on_mouse_exited_item(item: ESCItem) -> void:
 		self,
 		"Item unfocused: %s" % hotspot_focused
 	)
+	
+	var sprite = item._sprite_node
+	if sprite and sprite.material and sprite.material.shader == _highlightShader:				
+		sprite.material = null
+	
+	if _cur_item_highlight:
+		_cur_item_highlight.get_parent().remove_child(_cur_item_highlight)
+		_cur_item_highlight = null
 
 	if hover_stack.empty():
 		hotspot_focused = ""
