@@ -155,8 +155,7 @@ export(Dictionary) var custom_data = {}
 
 
 # ESCAnimationsResource (for walking, idling...)
-var animations: Resource setget set_animations
-#var animations: ESCAnimationResource setget set_animations
+var animations: ESCAnimationResource  setget set_animations
 
 # Reference to the animation node (null if none was found)
 var animation_sprite = null
@@ -486,8 +485,8 @@ func set_animations(p_animations: ESCAnimationResource) -> void:
 
 	animations = p_animations
 
-	if not animations.is_connected("changed", self, "_validate_animations"):
-		animations.connect("changed", self, "_validate_animations")
+	if not animations.is_connected("changed", self, "validate_animations"):
+		animations.connect("changed", self, "validate_animations")
 
 
 # Return the animation player node
